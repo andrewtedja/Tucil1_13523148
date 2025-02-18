@@ -1,5 +1,18 @@
-import java.io.*;
-import java.util.*;
+/*
+todo 
+    *  READ INPUT
+    ?   - read input (open from bin/txt file)
+    ?   - extract N (rows), M (cols), P (num. of pieces)
+    ?   - extract type (DEFAULT -> (implement first)
+    ?   - read P pieces, store as Piece object
+    ?   - store pieces in ArrayList<Piece> (dynamic array)
+    ! created: file reader, piece (shape), pieceList
+*/
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class ReadInput {
     // ? HELPER FUNCTION
@@ -59,7 +72,7 @@ public class ReadInput {
             return pieceList;
         }
 
-        char currChar = 0;
+        char currChar = 0; // ! invalid char
 
         for (char[] row : matrix) {
             char leadingChar = leadingNonSpace(row);
@@ -67,7 +80,7 @@ public class ReadInput {
             if (leadingChar == ' ') {
                 continue;
             } 
-            if (currChar != leadingChar && !tempPiece.isEmpty()) {
+            if (leadingChar != currChar && !tempPiece.isEmpty()) {
                 pieceList.add(tempPiece.toArray(new char[0][]));
                 tempPiece = new ArrayList<>();
             }
