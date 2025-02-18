@@ -5,7 +5,8 @@
     ?   - read input (open from bin/txt file)
     ?   - extract N (rows), M (cols), P (num. of pieces)
     ?   - extract type (DEFAULT -> (implement first)
-    ?   - read P pieces, store as Piece object
+    ?   - read P pieces, 
+    ?   - create piece -> char[][] (static)
     ?   - store pieces in ArrayList<Piece> (dynamic array)
     ! created: puzzle reader, piece (shape and ID), List<piece> 
 
@@ -18,7 +19,6 @@
     ! created: Board, char[][] grid (Board state)
 
     * PIECE
-    ?   - create piece -> char[][] (static)
     ?   - implement rotate() -> (0, 90, 180, 270) 
     ?   - implement flip() -> (horizontal, vertical)
     ?   - getAllOrientations() -> store unique orientations 
@@ -43,24 +43,33 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-            String fileName = "src/file.txt";
-            FileData fileData = ReadInput.readFile(fileName);
+        
+        String fileName = "test/file.txt";
+        FileData fileData = ReadInput.readFile(fileName);
 
-            System.out.println("N (row) = " + fileData.getN());
-            System.out.println("M (col) = " + fileData.getM());
-            System.out.println("P (num. pieces) = " + fileData.getP());
-            System.out.println("S (Type) = " + fileData.getS());
+        // * TEST BOARD
+        Board board = new Board(fileData);
+        board.printBoard();
 
-            ArrayList<char[][]> pieceList = ReadInput.createPieces(fileData.getMatrix());
+        
+        System.out.println("N (row) = " + fileData.getN());
+        System.out.println("M (col) = " + fileData.getM());
+        System.out.println("P (num. pieces) = " + fileData.getP());
+        System.out.println("S (Type) = " + fileData.getS());
 
-            System.out.println("Pieces from file: ");
-            for (char[][] piece : pieceList) {
-                System.out.println("Piece " + (pieceList.indexOf(piece) + 1) + ":");
-                for (char[] row : piece) {
-                    System.out.println(new String(row));
-                }
+
+        ArrayList<Piece> pieceList = fileData.getPieceList();
+
+        // TEST PRINT
+        System.out.println("Pieces from file: ");
+        for (Piece piece : pieceList) {
+            System.out.println("Piece " + (pieceList.indexOf(piece) + 1) + ":");
+            for (char[] row : piece.getShape()) {
+                System.out.println(new String(row));
             }
         }
-}
 
+        board.printBoard();
+    }
+}
 

@@ -54,18 +54,19 @@ public class ReadInput {
             System.out.println("ERROR READING FILE: " + e.getMessage() + " !");
         }
 
-        return new FileData(N, M, P, S, matrixList.toArray(new char[0][]));
+        ArrayList<Piece> pieceList = createPieces(matrixList.toArray(new char[0][]));
+
+        return new FileData(N, M, P, S, matrixList.toArray(new char[0][]), pieceList);
     }
 
-
     // * Pieces Pre-process
-    public static ArrayList<char[][]> createPieces(char[][] matrix) {
+    public static ArrayList<Piece> createPieces(char[][] matrix) {
         // ? piecelist: din matrix, store all pieces of matrix (char[][])
         // ? tempPiece: temp din array, store rows with same alphabet
         // ? target: hold leading character
         // ? leadingChar: first non-space char
 
-        ArrayList<char[][]> pieceList = new ArrayList<>();
+        ArrayList<Piece> pieceList = new ArrayList<>();
         ArrayList<char[]> tempPiece = new ArrayList<>();
 
         if (matrix.length == 0) {
@@ -81,7 +82,7 @@ public class ReadInput {
                 continue;
             } 
             if (leadingChar != currChar && !tempPiece.isEmpty()) {
-                pieceList.add(tempPiece.toArray(new char[0][]));
+                pieceList.add(new Piece(tempPiece.toArray(new char[0][]), pieceList.size() + 1));
                 tempPiece = new ArrayList<>();
             }
 
@@ -91,7 +92,7 @@ public class ReadInput {
 
         // Add the last collected group
         if (!tempPiece.isEmpty()) {
-            pieceList.add(tempPiece.toArray(new char[0][]));
+            pieceList.add(new Piece(tempPiece.toArray(new char[0][]), pieceList.size() + 1));
         }
 
         return pieceList;
@@ -118,5 +119,6 @@ public class ReadInput {
     //     }
     // }
 }
+
 
 
