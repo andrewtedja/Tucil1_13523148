@@ -39,11 +39,28 @@
     ?   - print board state before and after solving
 */
 
-
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        
-    }
+            String fileName = "src/file.txt";
+            FileData fileData = ReadInput.readFile(fileName);
+
+            System.out.println("N (row) = " + fileData.getN());
+            System.out.println("M (col) = " + fileData.getM());
+            System.out.println("P (num. pieces) = " + fileData.getP());
+            System.out.println("S (Type) = " + fileData.getS());
+
+            ArrayList<char[][]> pieceList = ReadInput.createPieces(fileData.getMatrix());
+
+            System.out.println("Pieces from file: ");
+            for (char[][] piece : pieceList) {
+                System.out.println("Piece " + (pieceList.indexOf(piece) + 1) + ":");
+                for (char[] row : piece) {
+                    System.out.println(new String(row));
+                }
+            }
+        }
 }
+
 
