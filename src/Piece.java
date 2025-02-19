@@ -6,16 +6,16 @@ import java.util.Set;
 
 public class Piece {
     private char[][] shape;
-    private int id;
     private int rows;
     private int cols;
+    private int id;
 
     // ? Constructor
     public Piece(char[][] shape, int id) {
         this.shape = shape;
-        this.id = id;
         this.rows = shape.length;
         this.cols = shape[0].length;
+        this.id = id;
     }
 
     // ? Getters and Setters
@@ -33,6 +33,9 @@ public class Piece {
 
     // Rotate 90
     public Piece rotate() {
+        if (shape == null || shape.length == 0 || shape[0].length == 0) {
+            return this;
+        }
         char[][] rotated = new char[cols][rows];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -42,7 +45,6 @@ public class Piece {
         return new Piece(rotated, id);
     }
 
-    // Flip horizontal
     public Piece flipHorizontal() {
         char[][] flipped = new char[rows][cols];
         for (int i = 0; i < rows; i++) {
@@ -53,7 +55,6 @@ public class Piece {
         return new Piece(flipped, id);
     }
 
-    // Flip vertical
     public Piece flipVertical() {
         char[][] flipped = new char[rows][cols];
         for (int i = 0; i < rows; i++) {
@@ -69,15 +70,12 @@ public class Piece {
         List<Piece> orientations = new ArrayList<>();
         Piece current = this;
 
-        // 4 rotations (0, 90, 180, 270)
+        // 4 rotations (0, 90, 180, 270) and flipped horizontally
         for (int r = 0; r < 4; r++) {
-            Piece flippedHorizontally = current.flipHorizontal();
-            Piece flippedVertically = current.flipVertical();
             addIfUnique(orientations, uniqueOrientations, current);
-            addIfUnique(orientations, uniqueOrientations, flippedHorizontally);
-            addIfUnique(orientations, uniqueOrientations, flippedVertically);
 
-            // Rotate to the next orientation
+            Piece flippedHorizontally = current.flipHorizontal();
+            addIfUnique(orientations, uniqueOrientations, flippedHorizontally);
             current = current.rotate();
         }
         return orientations;
@@ -99,4 +97,5 @@ public class Piece {
         return sb.toString();
     }
 }
+
 
