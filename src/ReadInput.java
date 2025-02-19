@@ -23,6 +23,22 @@ public class ReadInput {
         return ' ';
     }
 
+    private static void normalizeAndAddPiece(ArrayList<char[]> pieceRows, ArrayList<Piece> pieceList) {
+        int maxW = 0;
+        for (char[] row : pieceRows) {
+            maxW = Math.max(maxW, row.length);
+        }
+        
+        char[][] normalizedPiece = new char[pieceRows.size()][maxW];
+        for (int i = 0; i < pieceRows.size(); i++) {
+            char[] originalRow = pieceRows.get(i);
+            for (int j = 0; j < maxW; j++) {
+                normalizedPiece[i][j] = j < originalRow.length ? originalRow[j] : '.';
+            }
+        }
+        
+        pieceList.add(new Piece(normalizedPiece, pieceList.size() + 1));
+    }
     // * Read file -> Matrix
     public static FileData readFile(String filename) {
         int N = 0;
@@ -82,17 +98,16 @@ public class ReadInput {
                 continue;
             } 
             if (leadingChar != currChar && !tempPiece.isEmpty()) {
-                pieceList.add(new Piece(tempPiece.toArray(new char[0][]), pieceList.size() + 1));
+                normalizeAndAddPiece(tempPiece, pieceList);
                 tempPiece = new ArrayList<>();
             }
-
+        
             currChar = leadingChar;
             tempPiece.add(row);
         }
 
-        // Add the last collected group
         if (!tempPiece.isEmpty()) {
-            pieceList.add(new Piece(tempPiece.toArray(new char[0][]), pieceList.size() + 1));
+            normalizeAndAddPiece(tempPiece, pieceList);
         }
 
         return pieceList;
