@@ -1,14 +1,3 @@
-/* 
-todo
-    * BOARD
-    ?   - create board N x M (char [][], static)
-    ?   - printBoard()
-    ?   - canPlacePiece(Piece, row, col) -> check if a piece fits
-    ?   - placePiece(Piece, row, col) -> place a piece
-    ?   - removePiece(Piece, row, col) -> remove a piece
-    ! created: Board, char[][] grid (Board state)
-*/
-
 public class Board {
     private char[][] grid;
     private int rows;
@@ -27,18 +16,56 @@ public class Board {
         }
     }
 
-
     // ? Getters and setters
     public int getRows() { return rows; }
-    public int getCols() { return cols;}
+    public int getCols() { return cols; }
 
     public void printBoard() {
+        System.out.print("   ");
+        for (int j = 0; j < cols; j++) {
+            System.out.printf("%3d", j);
+        }
+        System.out.println();
+        
+        System.out.print("   ");
+        for (int j = 0; j < cols; j++) {
+            System.out.print("---");
+        }
+        System.out.println();
+        
         for (int i = 0; i < rows; i++) {
+            System.out.printf("%2d |", i);
             for (int j = 0; j < cols; j++) {
-                System.out.print(grid[i][j] + " ");
+                String cellStr = " " + grid[i][j] + " ";
+                
+                if (grid[i][j] == '.') {
+                    System.out.print(cellStr);
+                } else if (grid[i][j] == 'T') {
+                    System.out.print("\033[33m" + cellStr + "\033[0m");
+                } else {
+                    int pieceNum = grid[i][j] - '0';
+                    String colorCode = getColorForPiece(pieceNum);
+                    System.out.print(colorCode + cellStr + "\033[0m");
+                }
             }
+            System.out.print("|");
             System.out.println();
         }
+        System.out.print("    ");
+        for (int j = 0; j < cols; j++) {
+            System.out.print("---");
+        }
+    }
+    
+    private String getColorForPiece(int pieceId) {
+        if (pieceId % 7 == 0) return "\033[31m"; // Red
+        if (pieceId % 7 == 1) return "\033[32m"; // Green
+        if (pieceId % 7 == 2) return "\033[34m"; // Blue
+        if (pieceId % 7 == 3) return "\033[35m"; // Magenta
+        if (pieceId % 7 == 4) return "\033[36m"; // Cyan
+        if (pieceId % 7 == 5) return "\033[33m"; // Yellow
+        if (pieceId % 7 == 6) return "\033[37m"; // White
+        return "\033[0m"; // Default/Reset
     }
 
     public boolean canPlacePiece(Piece piece, int startRow, int startCol) {
@@ -46,12 +73,11 @@ public class Board {
         int pieceRows = shape.length;
         int pieceCols = shape[0].length;
 
-        // Check if piece fits
-        if (startRow < 0 || startCol < 0|| startRow + pieceRows > rows || startCol + pieceCols > cols) {
+        // check if piece fits
+        if (startRow < 0 || startCol < 0 || startRow + pieceRows > rows || startCol + pieceCols > cols) {
             return false;
         }
-
-        // Check if piece overlaps or not
+        // check if piece overlap
         for (int i = 0; i < pieceRows; i++) {
             for (int j = 0; j < pieceCols; j++) {
                 if (shape[i][j] != '.' && grid[startRow + i][startCol + j] != '.') {
@@ -63,7 +89,22 @@ public class Board {
         return true;
     }           
 
+    public boolean isFullyFilled() {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (grid[i][j] == '.' || grid[i][j] == ' ') {
+                    return false; 
+                }
+            }
+        }
+        return true;
+    }
+
     public boolean placePiece(Piece piece, int startRow, int startCol) {
+        return placePiece(piece, startRow, startCol, piece.getShape()[0][0]);
+    }
+    
+    public boolean placePiece(Piece piece, int startRow, int startCol, char pieceChar) {
         if (!canPlacePiece(piece, startRow, startCol)) {
             return false;
         }
@@ -71,7 +112,7 @@ public class Board {
         for (int i = 0; i < shape.length; i++) {
             for (int j = 0; j < shape[0].length; j++) {
                 if (shape[i][j] != '.') {
-                    grid[startRow + i][startCol + j] = shape[i][j];
+                    grid[startRow + i][startCol + j] = pieceChar;
                 }
             }
         }
@@ -88,6 +129,5 @@ public class Board {
             }
         }
     }
+
 }
-
-
