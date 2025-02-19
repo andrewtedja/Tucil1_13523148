@@ -17,7 +17,6 @@
     ?   - placePiece(Piece, row, col) -> place a piece
     ?   - removePiece(Piece, row, col) -> remove a piece
     ! created: Board, char[][] grid (Board state)
-
     * PIECE
     ?   - implement rotate() -> (0, 90, 180, 270) 
     ?   - implement flip() -> (horizontal, vertical)
@@ -43,33 +42,78 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        
         String fileName = "test/file.txt";
         FileData fileData = ReadInput.readFile(fileName);
 
-        // * TEST BOARD
         Board board = new Board(fileData);
-        board.printBoard();
 
+        ArrayList<Piece> pieceList = fileData.getPieceList();
         
+        System.out.println("\nPuzzle Information:");
         System.out.println("N (row) = " + fileData.getN());
         System.out.println("M (col) = " + fileData.getM());
         System.out.println("P (num. pieces) = " + fileData.getP());
         System.out.println("S (Type) = " + fileData.getS());
-
-
-        ArrayList<Piece> pieceList = fileData.getPieceList();
-
-        // TEST PRINT
-        System.out.println("Pieces from file: ");
-        for (Piece piece : pieceList) {
-            System.out.println("Piece " + (pieceList.indexOf(piece) + 1) + ":");
-            for (char[] row : piece.getShape()) {
-                System.out.println(new String(row));
-            }
+        System.out.println("Number of pieces loaded: " + pieceList.size());
+        System.out.println();
+        
+        boolean visualize = true;
+        Solver solver = new Solver(visualize);
+        
+        // Start solving process
+        boolean solved = solver.solve(board, pieceList);
+        
+        if (solved) {
+            System.out.println("\nSolution found!");
+            System.out.println("Final Solved Board:");
+            board.printBoard();
+        } else {
+            System.out.println("\nNo solution exists for this puzzle.");
+            System.out.println("Final Board State (incomplete):");
+            board.printBoard();
         }
 
-        board.printBoard();
+        System.out.println("\nSolver Statistics:");
+        System.out.println("Number of attempts: " + solver.getAttempt());
+        System.out.println("Runtime: " + solver.getRuntime() + " ms");
     }
+
+
+        // TEST PRINT ALL PIECES
+        // System.out.println("Pieces from file: ");
+        
+        // for (Piece piece : pieceList) {
+        //     System.out.println("Piece " + (pieceList.indexOf(piece) + 1) + ":");
+        //     for (char[] row : piece.getShape()) {
+        //         System.out.println(new String(row));
+        //     }
+        //     System.out.println("All Orientations:");
+        //     for (Piece orientation : piece.getAllOrientations()) {
+        //         System.out.println("Orientation:");
+        //         for (char[] row : orientation.getShape()) {
+        //             System.out.println(new String(row));
+        //         }
+        //         System.out.println(); // Separate orientations with a newline for clarity
+        //     }
+
+            // Piece rotatedPiece = piece.rotate();
+            // System.out.println("Rotated Piece:");
+            // for (char[] row : rotatedPiece.getShape()) {
+            //     System.out.println(new String(row));
+            // }
+            // Piece flipHorizontalPiece = piece.flipHorizontal();
+            // System.out.println("Flip Horizontal:");
+            // for (char[] row : flipHorizontalPiece.getShape()) {
+            //     System.out.println(new String(row));
+            // }
+            // Piece flipVerticalPiece = piece.flipVertical();
+            // System.out.println("Flip vertical:");
+            // for (char[] row : flipVerticalPiece.getShape()) {
+            //     System.out.println(new String(row));
+            // }
+        
+
+        // ! TEST ROTATE
 }
+
 
