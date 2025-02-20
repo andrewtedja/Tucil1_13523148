@@ -28,12 +28,23 @@ public class ReadInput {
         for (char[] row : pieceRows) {
             maxW = Math.max(maxW, row.length);
         }
+        // maxW -> num. cols
+        // [{ a, a}]
+        // [{ a,  }]
         
         char[][] normalizedPiece = new char[pieceRows.size()][maxW];
         for (int i = 0; i < pieceRows.size(); i++) {
             char[] originalRow = pieceRows.get(i);
             for (int j = 0; j < maxW; j++) {
-                normalizedPiece[i][j] = j < originalRow.length ? originalRow[j] : '.';
+                if (j < originalRow.length) {
+            if (originalRow[j] == ' ') {
+                normalizedPiece[i][j] = '.';
+            } else {
+                normalizedPiece[i][j] = originalRow[j];
+            }
+                } else {
+                    normalizedPiece[i][j] = '.';
+                }
             }
         }
         
@@ -134,6 +145,7 @@ public class ReadInput {
     //     }
     // }
 }
+
 
 
 
