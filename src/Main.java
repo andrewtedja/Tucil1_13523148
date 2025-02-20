@@ -57,7 +57,7 @@ public class Main {
         System.out.println("Number of pieces loaded: " + pieceList.size());
         System.out.println();
         
-        boolean visualize = true;
+        boolean visualize = false;
         Solver solver = new Solver(visualize);
         
         // Start solving process
@@ -76,10 +76,9 @@ public class Main {
         System.out.println("\nSolver Statistics:");
         System.out.println("Number of attempts: " + solver.getAttempt());
         System.out.println("Runtime: " + solver.getRuntime() + " ms");
-    }
+        
 
-
-        // TEST PRINT ALL PIECES
+        // // ! TESTING : PRINT ALL PIECES ORIENTATIONS
         // System.out.println("Pieces from file: ");
         
         // for (Piece piece : pieceList) {
@@ -95,25 +94,27 @@ public class Main {
         //         }
         //         System.out.println(); // Separate orientations with a newline for clarity
         //     }
-
-            // Piece rotatedPiece = piece.rotate();
-            // System.out.println("Rotated Piece:");
-            // for (char[] row : rotatedPiece.getShape()) {
-            //     System.out.println(new String(row));
-            // }
-            // Piece flipHorizontalPiece = piece.flipHorizontal();
-            // System.out.println("Flip Horizontal:");
-            // for (char[] row : flipHorizontalPiece.getShape()) {
-            //     System.out.println(new String(row));
-            // }
-            // Piece flipVerticalPiece = piece.flipVertical();
-            // System.out.println("Flip vertical:");
-            // for (char[] row : flipVerticalPiece.getShape()) {
-            //     System.out.println(new String(row));
-            // }
-        
-
-        // ! TEST ROTATE
+        // }
+    }
 }
+
+// Piece rotatedPiece = piece.rotate();
+// System.out.println("Rotated Piece:");
+// for (char[] row : rotatedPiece.getShape()) {
+//     System.out.println(new String(row));
+// }
+// Piece flipHorizontalPiece = piece.flipHorizontal();
+// System.out.println("Flip Horizontal:");
+// for (char[] row : flipHorizontalPiece.getShape()) {
+//     System.out.println(new String(row));
+// }
+// Piece flipVerticalPiece = piece.flipVertical();
+// System.out.println("Flip vertical:");
+// for (char[] row : flipVerticalPiece.getShape()) {
+//     System.out.println(new String(row));
+// }
+
+
+
 
 

@@ -16,10 +16,10 @@ public class Solver {
     }
 
     public boolean solve(Board board, ArrayList<Piece> pieceList) {
-        startTime = System.currentTimeMillis();
+        startTime = System.nanoTime();
         boolean result = solveHelper(board, pieceList, 0);
-        endTime = System.currentTimeMillis();
-        runtime = (int) (endTime - startTime);
+        endTime = System.nanoTime();
+        runtime = (int) (endTime - startTime) / 1000000;
         return result;
     }
 
@@ -74,5 +74,4 @@ public class Solver {
         return runtime;
     }
 }
-
 
