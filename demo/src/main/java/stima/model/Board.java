@@ -1,3 +1,5 @@
+package stima.model;
+
 public class Board {
     private char[][] grid;
     private int rows;
