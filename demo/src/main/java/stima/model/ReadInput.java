@@ -80,9 +80,26 @@ public class ReadInput {
                 N = Integer.parseInt(firstLine[0]);
                 M = Integer.parseInt(firstLine[1]);
                 P = Integer.parseInt(firstLine[2]);
+            } else {
+                throw new IllegalArgumentException("File format incorrect!");
             }
+            
+            // * VALIDATION
+            if (N <= 0 || M <= 0) {
+                throw new IllegalArgumentException("N/M must be positive!");
+            }
+
+            if (P <= 0 || P > 26) {
+                throw new IllegalArgumentException("P must be positive and less than 26!");
+            }
+
             // ? SECOND LINE (S/Type)
             S = reader.readLine().strip();
+            if (S.isEmpty()) {
+                throw new IllegalArgumentException("Type cannot be empty!");
+            } else if (!S.equals("DEFAULT") && !S.equals("CUSTOM") && !S.equals("PIECES")) {
+                throw new IllegalArgumentException("Type hanya DEFAULT/CUSTOM/PYRAMID!");
+            }
 
             // ? REST (Pieces Matrix)
             String line;
@@ -97,6 +114,10 @@ public class ReadInput {
         }
 
         ArrayList<Piece> pieceList = createPieces(matrixList.toArray(new char[0][]));
+        
+        if (pieceList.size() != P) {
+            throw new IllegalArgumentException("Number of pieces does not match P!");
+        }
 
         return new FileData(N, M, P, S, matrixList.toArray(new char[0][]), pieceList);
     }
@@ -161,6 +182,8 @@ public class ReadInput {
     //     }
     // }
 }
+
+
 
 
 
