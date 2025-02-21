@@ -5,13 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import java.util.*;
 
-import stima.model.Main;
+
 import stima.model.Board;
 import stima.model.FileData;
-import stima.model.Solver;
-import stima.model.Piece;
 import stima.model.ReadInput;
 
 import java.io.IOException;
@@ -24,22 +21,17 @@ public class App extends Application {
 
     private static Scene scene;
     private static Board board;
+    private static FileData fileData;
+    private static String currentFileName = "";
     private static boolean solved = false;
+    private static int attempts = 0;
+    private static int runtime = 0;
     
     @Override
     public void start(Stage stage) throws IOException {
-
-        String filename = "test/file2.txt";
-        FileData fileData = ReadInput.readFile(filename);
-        board = new Board(fileData);
-        ArrayList<Piece> pieceList = new ArrayList<>();
-        Solver solver = new Solver(false);
-        solved = solver.solve(board, pieceList);
-
-
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        scene = new Scene(loadFXML("primary"), 800, 600);
         stage.setScene(scene);
-        stage.setTitle("IQPuzzler: filename");
+        stage.setTitle("IQPuzzler");
         stage.show();
     }
 
@@ -51,13 +43,42 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
-
+    public static void loadFile(String filename) {
+        currentFileName = filename;
+        fileData = ReadInput.readFile(filename);
+        board = new Board(fileData);
+        solved = false;
+    }
     public static Board getBoard() {
         return board;
     }
 
+    public static FileData getFileData() {
+        return fileData;
+    }
+    
+    public static String getCurrentFileName() {
+        return currentFileName;
+    }
+    
     public static boolean isSolved() {
         return solved;
+    }
+
+    public static void setSolver() {
+        solved = isSolved();
+    }
+
+    public static void setStatistics(int attempts, int runtime) {
+        App.attempts = attempts;
+        App.runtime = runtime;
+    }
+    public static int getAttempts() {
+        return attempts;
+    }
+    
+    public static int getRuntime() {
+        return runtime;
     }
 
     public static void main(String[] args) {

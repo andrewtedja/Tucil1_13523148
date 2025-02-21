@@ -16,10 +16,17 @@ public class Board {
             }
         }
     }
-
+    // ? Getters
     public int getRows() { return rows; }
     public int getCols() { return cols; }
+    public char getCell(int row, int col) {
+        if (row >= 0 && row < rows && col >= 0 && col < cols) {
+            return grid[row][col];
+        }
+        return ' ';
+    }
 
+    // ? MAIN FUNCTIONS
     public void printBoard() {
         System.out.print("   ");
         for (int j = 0; j < cols; j++) {
@@ -40,8 +47,6 @@ public class Board {
                 
                 if (grid[i][j] == '.') {
                     System.out.print(cellStr);
-                } else if (grid[i][j] == 'T') {
-                    System.out.print("\033[33m" + cellStr + "\033[0m");
                 } else {
                     int pieceNum = grid[i][j] - '0';
                     String colorCode = getColorForPiece(pieceNum);

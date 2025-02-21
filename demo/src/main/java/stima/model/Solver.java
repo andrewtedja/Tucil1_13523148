@@ -25,14 +25,15 @@ public class Solver {
     }
 
     private boolean solveHelper(Board board, ArrayList<Piece> pieceList, int pieceIndex) {
+        
         attempt++;
-
+        
         if (pieceIndex == pieceList.size()) {
             return board.isFullyFilled();
         }
-
+        
         Piece piece = pieceList.get(pieceIndex);
-
+        
         for (int i = 0; i < board.getRows(); i++) {
             for (int j = 0; j < board.getCols(); j++) {
                 for (Piece orientation: piece.getAllOrientations()) {
@@ -43,6 +44,7 @@ public class Solver {
                         }
                         
                         board.placePiece(orientation, i, j);
+                        
                         
                         if (solveHelper(board, pieceList, pieceIndex + 1)){
                             return true;
@@ -61,6 +63,7 @@ public class Solver {
         return false;
     }
     
+    
     private void clearConsole() {
         System.out.print("\033[H\033[2J"); 
         System.out.flush();
@@ -75,4 +78,3 @@ public class Solver {
         return runtime;
     }
 }
-

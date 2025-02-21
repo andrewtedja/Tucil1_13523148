@@ -74,7 +74,8 @@ public class Piece {
         // 4 rotations (0, 90, 180, 270) and flipped horizontally
         for (int r = 0; r < 4; r++) {
             addIfUnique(orientations, uniqueOrientations, current);
-
+            // Piece flippedVertically = current.flipVertical();
+            // addIfUnique(orientations, uniqueOrientations, flippedVertically);
             Piece flippedHorizontally = current.flipHorizontal();
             addIfUnique(orientations, uniqueOrientations, flippedHorizontally);
             current = current.rotate();
