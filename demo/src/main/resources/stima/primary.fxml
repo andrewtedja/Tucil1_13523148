@@ -16,7 +16,7 @@
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
 
-   <Label fx:id="titleLabel" text="IQ Puzzler Solver" styleClass="title-label"/>
+   <Label fx:id="titleLabel" text="IQ Puzzler Pro" styleClass="title-label"/>
    <Label fx:id="subtitleLabel" text="Tucil 1 - IF2211 Strategi Algoritma" styleClass="subtitle-label"/>
 
    <VBox alignment="CENTER" spacing="15.0">

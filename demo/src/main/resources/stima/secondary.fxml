@@ -41,7 +41,7 @@
                 <padding>
                     <Insets top="10" right="10" bottom="10" left="10" />
                 </padding>
-                <Label text="Puzzle Information" styleClass="puzzle-info-label"/>
+                <Label text="IQPuzzler Config Information" styleClass="puzzle-info-label"/>
                 <Label fx:id="infoLabel" wrapText="true" styleClass="info-label"/>
                 <Separator styleClass="info-separator"/>
                 <Label text="Results" styleClass="results-label"/>

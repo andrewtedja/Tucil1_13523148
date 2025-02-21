@@ -117,11 +117,15 @@ VBox VBox {
 	-fx-background-color: #364e2e;
 }
 
-.filename,
-.status-label {
+.filename {
 	-fx-text-fill: #fffdd0;
 }
 
+.status-label {
+	-fx-font-weight: bold;
+	-fx-font-size: 18px;
+	-fx-text-fill: #ffffff;
+}
 .center-splitpane {
 	-fx-background-color: #ffded0;
 }
@@ -159,17 +163,25 @@ VBox VBox {
 	-fx-text-fill: #1f1912;
 }
 
-.solve-btn,
-.stop-btn {
+.solve-btn {
 	-fx-background-color: #dc7a35;
 	-fx-text-fill: #fffdd0;
 	-fx-font-weight: bold;
 	-fx-cursor: hand;
 }
 
-.solve-btn:hover,
-.stop-btn:hover {
+.stop-btn {
+	-fx-background-color: #e04b37;
+	-fx-text-fill: #fffdd0;
+	-fx-font-weight: bold;
+	-fx-cursor: hand;
+}
+
+.solve-btn:hover {
 	-fx-background-color: #9b5625;
+}
+.stop-btn:hover {
+	-fx-background-color: #882c20;
 }
 
 .info-label,

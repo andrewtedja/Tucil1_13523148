@@ -18,7 +18,7 @@ public class PrimaryController {
     
     @FXML
     public void initialize() {
-        titleLabel.setText("IQ Puzzler Solver");
+        titleLabel.setText("IQ Puzzler Pro Solver");
         subtitleLabel.setText("Tucil 1 - IF2211 Strategi Algoritma");
     }
 

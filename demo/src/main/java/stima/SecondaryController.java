@@ -13,10 +13,9 @@ import stima.model.Board;
 import stima.model.FileData;
 import stima.model.Piece;
 import stima.model.Solver;
-
 import java.util.Timer;
 import java.util.TimerTask;
-
+import javafx.concurrent.Task;
 
 public class SecondaryController {
     @FXML private Label fileNameLabel;
@@ -30,7 +29,7 @@ public class SecondaryController {
     private ArrayList<Piece> pieceList;
     private boolean visualizeMode = false;
     private Solver solver;
-    private Thread solverThread;
+    private Task<Void> solverTask;
     private Timer updateTimer;
     private final int UPDATE_INTERVAL_MS = 1; 
 
@@ -48,7 +47,6 @@ public class SecondaryController {
 
         // Display pieces
         StringBuilder info = new StringBuilder();
-        info.append("File IQPuzzler Information:\n");
         info.append("Board Rows (N): ").append(fileData.getN()).append("\n");
         info.append("Board Columns (M): ").append(fileData.getM()).append("\n");
         info.append("Puzzle Type (S): ").append(fileData.getS()).append("\n");
@@ -56,7 +54,7 @@ public class SecondaryController {
         infoLabel.setText(info.toString());
 
         drawEmptyBoard();
-        statusLabel.setText("Ready to solve");
+        statusLabel.setText("Bruteforce Algorithm Solver");
         statisticsLabel.setText("");
         stopButton.setDisable(true);
     }
@@ -158,41 +156,45 @@ public class SecondaryController {
             }
         }, 0, UPDATE_INTERVAL_MS);
 
-        solverThread = new Thread(() -> {
-            boolean result = solver.solve(board, pieceList);
-            if (updateTimer != null) {
-                updateTimer.cancel();
-                updateTimer = null;
-            }
-
-            App.setSolved(result);
-            App.setStatistics(solver.getRuntime(), solver.getAttempt());
-
-            Platform.runLater(() -> {
-                if (result) {
-                    statusLabel.setText("Solution found!");
-                    solveButton.setDisable(true);
-                } else {
-                    statusLabel.setText("No solution!");
+        solverTask = new Task<>() {
+            @Override
+            protected Void call() {
+                boolean result = solver.solve(board, pieceList);
+                if (updateTimer != null) {
+                    updateTimer.cancel();
+                    updateTimer = null;
                 }
-                
-                drawBoard(board);
-                updateStatistics();
-                
-                solveButton.setDisable(false);
-                stopButton.setDisable(true);
-                backButton.setDisable(false);
-            });
-        });
-        solverThread.start();
+
+                App.setSolved(result);
+                App.setStatistics(solver.getAttempt(), solver.getRuntime());
+
+                Platform.runLater(() -> {
+                    if (result) {
+                        statusLabel.setText("Solution found!");
+                        solveButton.setDisable(false);
+                    } else {
+                        statusLabel.setText("No solution!");
+                    }
+                    
+                    drawBoard(board);
+                    updateStatistics();
+                    
+                    solveButton.setDisable(false);
+                    stopButton.setDisable(true);
+                    backButton.setDisable(false);
+                });
+                return null;
+            }
+        };
+        new Thread(solverTask).start();
     }
 
     @FXML
     private void handleStop() {
         if (solver != null) {
             solver.stop();
-            if (solverThread != null && solverThread.isAlive()) {
-                solverThread.interrupt(); // stop thread (still fix)
+            if (solverTask != null && solverTask.isRunning()) {
+                solverTask.cancel(); // stop task
             }
 
             if (updateTimer != null) {
@@ -232,5 +234,4 @@ public class SecondaryController {
         App.setRoot("primary");
     }
 }
-
 
