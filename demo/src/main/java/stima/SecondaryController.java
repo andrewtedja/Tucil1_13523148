@@ -208,11 +208,9 @@ public class SecondaryController {
 
                 Platform.runLater(() -> {
                     if (result) {
-                        // System.out.println("Test");
                         statusLabel.setText("Solution found!");
                         showSaveInput();
                     } else {
-                        // System.out.println("Sasdasd");
                         statusLabel.setText("No solution!");
                         hideSaveInput();
                     }
@@ -299,7 +297,6 @@ public class SecondaryController {
         if (solver != null) {
             solver.stop();
             if (solverTask != null && solverTask.isRunning()) {
-
                 solverTask.cancel(); 
             }
 

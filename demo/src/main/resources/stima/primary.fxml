@@ -23,5 +23,6 @@
       <Button fx:id="loadFileButton" onAction="#handleLoadFile" text="Load Puzzle File" styleClass="upload-btn" />
       <Button fx:id="exitButton" onAction="#handleExit" text="Exit" styleClass="exit-btn" />
    </VBox>
+   <Label fx:id="validationLabel" text="(Validasi Input di CLI/Terminal)" styleClass="validation-label"/>
 </VBox>
 

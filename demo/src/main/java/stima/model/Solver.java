@@ -52,13 +52,18 @@ public class Solver {
         boolean result = solveHelper(board, pieceList, 0);
         endTime = System.nanoTime();
         runtime = (int) (endTime - startTime) / 1000000;
+        if (runtime < 0) {
+            runtime = -runtime;
+        }
         return result;
     }
 
     private boolean solveHelper(Board board, ArrayList<Piece> pieceList, int pieceIndex) {
         if (stopped) return false;
 
-        
+        if (pieceIndex > pieceList.size()) {
+            return false;
+        }
         if (pieceIndex == pieceList.size()) {
             return board.isFullyFilled();
         }
@@ -108,10 +113,10 @@ public class Solver {
         stopped = true; 
     }
     
-    private void clearConsole() {
-        System.out.print("\033[H\033[2J"); 
-        System.out.flush();
-    }
+    // private void clearConsole() {
+    //     System.out.print("\033[H\033[2J"); 
+    //     System.out.flush();
+    // }
     
     // ? Getter
     public int getAttempt() {
@@ -119,7 +124,7 @@ public class Solver {
     }
 
     public int getRuntime() {
-        return Math.max(runtime, 0);
+        return runtime;
     }
 
     // ? Helper
@@ -133,3 +138,5 @@ public class Solver {
         }
     }
 }
+
+

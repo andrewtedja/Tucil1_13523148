@@ -1,4 +1,3 @@
-// import java.util.Scanner;
 
 package stima.model;
 
@@ -42,10 +41,14 @@ package stima.model;
 */
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        String fileName = "test/file2.txt";
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the file path: ");
+        String fileName = scanner.nextLine();
+
         FileData fileData = ReadInput.readFile(fileName);
 
         Board board = new Board(fileData);
@@ -88,8 +91,9 @@ public class Main {
         System.out.println("Number of attempts: " + solver.getAttempt());
         System.out.println("Runtime: " + solver.getRuntime() + " ms");
         
+        scanner.close();
 
-        // // ! TESTING : PRINT ALL PIECES ORIENTATIONS
+        // ! TESTING : PRINT ALL PIECES ORIENTATIONS
         // System.out.println("Pieces from file: ");
         
         // for (Piece piece : pieceList) {
@@ -108,24 +112,5 @@ public class Main {
         // }
     }
 }
-
-// Piece rotatedPiece = piece.rotate();
-// System.out.println("Rotated Piece:");
-// for (char[] row : rotatedPiece.getShape()) {
-//     System.out.println(new String(row));
-// }
-// Piece flipHorizontalPiece = piece.flipHorizontal();
-// System.out.println("Flip Horizontal:");
-// for (char[] row : flipHorizontalPiece.getShape()) {
-//     System.out.println(new String(row));
-// }
-// Piece flipVerticalPiece = piece.flipVertical();
-// System.out.println("Flip vertical:");
-// for (char[] row : flipVerticalPiece.getShape()) {
-//     System.out.println(new String(row));
-// }
-
-
-
 
 

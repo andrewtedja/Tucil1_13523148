@@ -1,0 +1,12 @@
+stima\model\Board.class
+stima\model\Solver.class
+stima\SecondaryController$2.class
+stima\model\Piece.class
+stima\SecondaryController$1.class
+stima\SecondaryController.class
+module-info.class
+stima\App.class
+stima\model\ReadInput.class
+stima\PrimaryController.class
+stima\model\FileData.class
+stima\model\Main.class

@@ -50,7 +50,7 @@
 
                 <Label fx:id="saveInputLabel" text="Apakah anda ingin menyimpan solusi? (ya/tidak)" visible="false"/>
                 <HBox spacing="10" styleClass="input-hbox">
-                    <TextField fx:id="saveResponseField" promptText="ya/tidak'" styleClass="input-save" visible="false"/>
+                    <TextField fx:id="saveResponseField" promptText='Enter "ya" / "tidak"' styleClass="input-save" visible="false"/>
                     <Button fx:id="saveConfirmButton" text="Confirm" onAction="#handleSaveConfirm" styleClass="confirm-btn" visible="false"/>
                 </HBox>
             </VBox>
