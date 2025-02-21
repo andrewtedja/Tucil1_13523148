@@ -102,7 +102,7 @@ public class SecondaryController {
 
 
     private Color getPieceColor(int pieceId) {
-        switch (pieceId % 11) {
+        switch (pieceId % 26) {
             case 0: return Color.BLUE;
             case 1: return Color.GREEN;
             case 2: return Color.MAGENTA; 
@@ -114,12 +114,27 @@ public class SecondaryController {
             case 8: return Color.LIGHTGRAY;
             case 9: return Color.WHITE;
             case 10: return Color.DARKGRAY;
-            default: return Color.YELLOW;
+            case 11: return Color.YELLOW;
+            case 12: return Color.BROWN;
+            case 13: return Color.PURPLE;
+            case 14: return Color.TEAL;
+            case 15: return Color.INDIGO;
+            case 16: return Color.VIOLET;
+            case 17: return Color.GOLD;
+            case 18: return Color.SILVER;
+            case 19: return Color.BEIGE;
+            case 20: return Color.IVORY;
+            case 21: return Color.KHAKI;
+            case 22: return Color.LAVENDER;
+            case 23: return Color.MAROON;
+            case 24: return Color.NAVY;
+            case 25: return Color.OLIVE;
+            default: return Color.BLACK;
         }
     }
 
     private java.awt.Color getAWTPieceColor(int pieceId) { 
-        switch (pieceId % 11) {
+        switch (pieceId % 26) {
             case 0: return java.awt.Color.BLUE;
             case 1: return java.awt.Color.GREEN;
             case 2: return java.awt.Color.MAGENTA; 
@@ -131,7 +146,22 @@ public class SecondaryController {
             case 8: return java.awt.Color.LIGHT_GRAY;
             case 9: return java.awt.Color.WHITE;
             case 10: return java.awt.Color.DARK_GRAY;
-            default: return java.awt.Color.YELLOW;
+            case 11: return java.awt.Color.YELLOW;
+            case 12: return new java.awt.Color(165, 42, 42);
+            case 13: return new java.awt.Color(128, 0, 128); 
+            case 14: return new java.awt.Color(0, 128, 128); 
+            case 15: return new java.awt.Color(75, 0, 130); 
+            case 16: return new java.awt.Color(238, 130, 238); 
+            case 17: return new java.awt.Color(255, 215, 0); 
+            case 18: return new java.awt.Color(192, 192, 192); 
+            case 19: return new java.awt.Color(245, 245, 220); 
+            case 20: return new java.awt.Color(255, 255, 240); 
+            case 21: return new java.awt.Color(240, 230, 140); 
+            case 22: return new java.awt.Color(230, 190, 255); 
+            case 23: return new java.awt.Color(128, 0, 0);
+            case 24: return new java.awt.Color(0, 0, 128); 
+            case 25: return new java.awt.Color(128, 128, 0); 
+            default: return java.awt.Color.BLACK;
         }
     }
 
