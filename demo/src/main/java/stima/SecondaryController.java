@@ -23,7 +23,6 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.awt.Graphics2D;
-import java.awt.Color as AWTColor;
 
 public class SecondaryController {
     @FXML private Label fileNameLabel;
@@ -103,52 +102,36 @@ public class SecondaryController {
 
 
     private Color getPieceColor(int pieceId) {
-        if (pieceId % 14 == 0) {
-            return Color.BLUE;
-        } else if (pieceId % 14 == 1) {
-            return Color.GREEN;
-        } else if (pieceId % 14 == 2) {
-            return Color.VIOLET;
-        } else if (pieceId % 14 == 3) {
-            return Color.SALMON;
-        } else if (pieceId % 14 == 4) {
-            return Color.ORANGE;
-        } else if (pieceId % 14 == 5) {
-            return Color.PINK;
-        } else if (pieceId % 14 == 6) {
-            return Color.CYAN;
-        } else if (pieceId % 14 == 7) {
-            return Color.RED;
-        } else if (pieceId % 14 == 8) {
-            return Color.MAGENTA;
-        } else if (pieceId % 14 == 9) {
-            return Color.CHOCOLATE;
-        } else if (pieceId % 14 == 10) {
-            return Color.DARKSEAGREEN;
-        } else if (pieceId % 14 == 11) {
-            return Color.GOLD;
-        } else if (pieceId % 14 == 12) {
-            return Color.LIGHTGRAY;
-        } else if (pieceId % 14 == 13) {
-            return Color.LIGHTGREEN;
-        } else {
-            return Color.YELLOW;
+        switch (pieceId % 11) {
+            case 0: return Color.BLUE;
+            case 1: return Color.GREEN;
+            case 2: return Color.MAGENTA; 
+            case 3: return Color.ORANGE;
+            case 4: return Color.PINK;
+            case 5: return Color.CYAN;
+            case 6: return Color.RED;
+            case 7: return Color.MAGENTA;
+            case 8: return Color.LIGHTGRAY;
+            case 9: return Color.WHITE;
+            case 10: return Color.DARKGRAY;
+            default: return Color.YELLOW;
         }
     }
 
-    private AWTColor getAWTPieceColor(int pieceId) {
+    private java.awt.Color getAWTPieceColor(int pieceId) { 
         switch (pieceId % 11) {
-            case 0: return AWTColor.BLUE;
-            case 1: return AWTColor.GREEN;
-            case 2: return AWTColor.MAGENTA; 
-            case 3: return new AWTColor(250, 128, 114); 
-            case 4: return AWTColor.ORANGE;
-            case 5: return AWTColor.PINK;
-            case 6: return AWTColor.CYAN;
-            case 7: return AWTColor.RED;
-            case 8: return AWTColor.MAGENTA;
-            case 9: return new AWTColor(210, 105, 30); 
-            default: return AWTColor.YELLOW;
+            case 0: return java.awt.Color.BLUE;
+            case 1: return java.awt.Color.GREEN;
+            case 2: return java.awt.Color.MAGENTA; 
+            case 3: return java.awt.Color.ORANGE;
+            case 4: return java.awt.Color.PINK;
+            case 5: return java.awt.Color.CYAN;
+            case 6: return java.awt.Color.RED;
+            case 7: return java.awt.Color.MAGENTA;
+            case 8: return java.awt.Color.LIGHT_GRAY;
+            case 9: return java.awt.Color.WHITE;
+            case 10: return java.awt.Color.DARK_GRAY;
+            default: return java.awt.Color.YELLOW;
         }
     }
 
@@ -225,11 +208,11 @@ public class SecondaryController {
 
                 Platform.runLater(() -> {
                     if (result) {
-                        // System.out.println("Solution found!");
+                        // System.out.println("Test");
                         statusLabel.setText("Solution found!");
                         showSaveInput();
                     } else {
-                        // System.out.println("Sasdasd!");
+                        // System.out.println("Sasdasd");
                         statusLabel.setText("No solution!");
                         hideSaveInput();
                     }
@@ -262,17 +245,41 @@ public class SecondaryController {
 
 
     // ! SAVE SOLUTION AS IMAEG (BONUS)
-    private void saveSolutionAsImage(Board board, String folderPath, String filePath) throws IOException {
+    private void saveSolutionAsImage(Board board, String folderPath, String filePath)  {
         int rows = board.getRows();
         int cols = board.getCols();
         int cellsize = 100;
         int width = cols * cellsize;
         int height = rows * cellsize;
 
-        BufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2d = image.createGraphics();
-        g2d.setColor(AWTColor.WHITE);
+        g2d.setColor(java.awt.Color.WHITE);
         g2d.fillRect(0, 0, width, height);
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                char cell = board.getCell(i, j);
+                if (cell != '.') {
+                    int pieceId = cell - '0';
+                    g2d.setColor(getAWTPieceColor(pieceId));
+                    g2d.fillRect(j * cellsize, i * cellsize, cellsize, cellsize);
+                }
+                g2d.setColor(java.awt.Color.BLACK);
+                g2d.drawRect(j * cellsize, i * cellsize, cellsize, cellsize);
+            }
+        }
+        g2d.dispose();
+        File folder = new File(folderPath);
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
+        File outputFile = new File(folderPath + File.separator + filePath);
+        try {
+            ImageIO.write(image, "png", outputFile);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     @FXML
@@ -280,14 +287,13 @@ public class SecondaryController {
         String response = saveResponseField.getText().trim();
         if (response.equalsIgnoreCase("ya")) {
             currentBoard.writeSolutionToOutput(App.getFolderPath(), App.getFilePath());
-            statusLabel.setText("Solution ditemukan! (saved)");
+            saveSolutionAsImage(currentBoard, App.getFolderPath(), "solution.png");
+            statusLabel.setText("Solution ditemukan! (saved in test/output.txt and test/solution.png)");
         } else {
             statusLabel.setText("Solusi ditemukan! (not saved)");
         }
         hideSaveInput();
     }
-    // Stop not load here
-
     @FXML
     private void handleStop() {
         if (solver != null) {
