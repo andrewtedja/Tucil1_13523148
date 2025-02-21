@@ -13,7 +13,7 @@
    </padding>
 
    <Label fx:id="titleLabel" text="IQ Puzzler Solver" styleClass="title-label"/>
-   <Label fx:id="subtitleLabel" text="A backtracking algorithm for puzzle solving" styleClass="subtitle-label"/>
+   <Label fx:id="subtitleLabel" text="Tucil 1 - IF2211 Strategi Algoritma" styleClass="subtitle-label"/>
 
    <!-- <ImageView fx:id="logoImage" fitHeight="200.0" fitWidth="200.0" preserveRatio="true" pickOnBounds="false" /> -->
 

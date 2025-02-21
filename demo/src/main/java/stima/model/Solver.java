@@ -7,7 +7,7 @@ public class Solver {
     private long endTime = 0;
     private int runtime = 0;
     private boolean showTesting = false;
-    private boolean stopped;
+    private volatile boolean stopped;
 
     public Solver() {
         this.showTesting = false;

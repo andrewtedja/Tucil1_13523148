@@ -8,14 +8,14 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import stima.model.Board;
 import stima.model.FileData;
 import stima.model.Piece;
 import stima.model.Solver;
 
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class SecondaryController {
@@ -26,15 +26,13 @@ public class SecondaryController {
     @FXML private Button stopButton;
     @FXML private Button backButton;
     @FXML private Canvas boardCanvas;
-    @FXML private GridPane piecesGrid;
     @FXML private Label statisticsLabel;
-    @FXML private VBox piecesContainer;
-
     private ArrayList<Piece> pieceList;
-    private ArrayList<Canvas> pieceCanvases = new ArrayList<>();
     private boolean visualizeMode = false;
     private Solver solver;
     private Thread solverThread;
+    private Timer updateTimer;
+    private final int UPDATE_INTERVAL_MS = 1; 
 
     @FXML
     private void initialize() {
@@ -90,15 +88,18 @@ public class SecondaryController {
 
 
     private Color getPieceColor(int pieceId) {
-        switch (pieceId % 7) {
-            case 0: return Color.RED;
+        switch (pieceId % 11) {
+            case 0: return Color.BLUE;
             case 1: return Color.GREEN;
-            case 2: return Color.BLUE;
-            case 3: return Color.PURPLE;
-            case 4: return Color.CYAN;
-            case 5: return Color.ORANGE;
-            case 6: return Color.PINK;
-            default: return Color.GRAY;
+            case 2: return Color.VIOLET;
+            case 3: return Color.SALMON;
+            case 4: return Color.ORANGE;
+            case 5: return Color.PINK;
+            case 6: return Color.CYAN;
+            case 7: return Color.RED;
+            case 8: return Color.MAGENTA;
+            case 9: return Color.CHOCOLATE;
+            default: return Color.YELLOW;
         }
     }
 
@@ -140,8 +141,28 @@ public class SecondaryController {
 
         solver = new Solver(visualizeMode);
         Board board = App.getBoard();
+
+        // * TIMER SOLVE
+        if (updateTimer != null) {
+            updateTimer.cancel();
+        }
+        updateTimer = new Timer();
+        updateTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    drawBoard(board);
+                    statusLabel.setText("Solving... Attempts: " + solver.getAttempt());
+                });
+            }
+        }, 0, UPDATE_INTERVAL_MS);
+
         solverThread = new Thread(() -> {
             boolean result = solver.solve(board, pieceList);
+            if (updateTimer != null) {
+                updateTimer.cancel();
+                updateTimer = null;
+            }
 
             App.setSolved(result);
             App.setStatistics(solver.getAttempt(), solver.getRuntime());
@@ -149,6 +170,7 @@ public class SecondaryController {
             Platform.runLater(() -> {
                 if (result) {
                     statusLabel.setText("Solution found!");
+                    solveButton.setDisable(true);
                 } else {
                     statusLabel.setText("No solution!");
                 }
@@ -156,7 +178,7 @@ public class SecondaryController {
                 drawBoard(board);
                 updateStatistics();
                 
-                solveButton.setDisable(true);
+                solveButton.setDisable(false);
                 stopButton.setDisable(true);
                 backButton.setDisable(false);
             });
@@ -170,6 +192,11 @@ public class SecondaryController {
             solver.stop();
             if (solverThread != null && solverThread.isAlive()) {
                 solverThread.interrupt();
+            }
+
+            if (updateTimer != null) {
+                updateTimer.cancel();
+                updateTimer = null;
             }
             Platform.runLater(() -> {
                 statusLabel.setText("Stopped!");
@@ -197,7 +224,12 @@ public class SecondaryController {
 
     @FXML
     private void switchToPrimary() throws IOException {
+        if (updateTimer != null) {
+            updateTimer.cancel();
+            updateTimer = null;
+        }
         App.setRoot("primary");
     }
 }
+
 
