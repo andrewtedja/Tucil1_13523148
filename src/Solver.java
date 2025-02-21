@@ -1,11 +1,18 @@
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.File;
 
 public class Solver {
     private int attempt = 0;
     private long startTime = 0;
     private long endTime = 0;
     private int runtime = 0;
+
     private boolean showTesting = false;
+
+
 
     public Solver() {
         this.showTesting = false;
@@ -13,21 +20,25 @@ public class Solver {
     
     public Solver(boolean showTesting) {
         this.showTesting = showTesting;
+
     }
 
     public boolean solve(Board board, ArrayList<Piece> pieceList) {
         startTime = System.nanoTime();
         boolean result = solveHelper(board, pieceList, 0);
         endTime = System.nanoTime();
+
         runtime = (int) (endTime - startTime) / 1000000;
         return result;
     }
 
     private boolean solveHelper(Board board, ArrayList<Piece> pieceList, int pieceIndex) {
-        attempt++;
 
         if (pieceIndex == pieceList.size()) {
-            return board.isFullyFilled();
+            if (board.isFullyFilled()) {
+                return true;
+            }
+            return false;
         }
 
         Piece piece = pieceList.get(pieceIndex);
@@ -42,7 +53,7 @@ public class Solver {
                         }
                         
                         board.placePiece(orientation, i, j);
-                        
+                        attempt++;
                         if (solveHelper(board, pieceList, pieceIndex + 1)){
                             return true;
                         }
@@ -73,5 +84,6 @@ public class Solver {
     public int getRuntime() {
         return runtime;
     }
+
 }
 

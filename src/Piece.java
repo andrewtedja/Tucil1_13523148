@@ -9,6 +9,7 @@ public class Piece {
     private int rows;
     private int cols;
     private int id;
+    private List<Piece> allOrientations;
 
     // ? Constructor
     public Piece(char[][] shape, int id) {
@@ -16,6 +17,7 @@ public class Piece {
         this.rows = shape.length;
         this.cols = shape[0].length;
         this.id = id;
+        this.allOrientations = null;
     }
 
     // ? Getters and Setters
@@ -65,7 +67,7 @@ public class Piece {
         return new Piece(flipped, id);
     }
 
-    public List<Piece> getAllOrientations() {
+    public List<Piece> getAllOrientationsList() {
         Set<String> uniqueOrientations = new HashSet<>();
         List<Piece> orientations = new ArrayList<>();
         Piece current = this;
@@ -80,7 +82,16 @@ public class Piece {
         }
         return orientations;
     }
+    public void initializeOrientations() {
+        this.allOrientations = getAllOrientationsList();
+    }
 
+    public List<Piece> getAllOrientations() {
+        if (allOrientations == null) {
+            initializeOrientations(); 
+        }
+        return allOrientations;
+    }
     // ? Helpers
     private void addIfUnique(List<Piece> orientations, Set<String> uniqueOrientations, Piece piece) {
         String rep = pieceToString(piece.getShape());

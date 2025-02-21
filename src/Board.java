@@ -15,43 +15,35 @@ public class Board {
         }
     }
 
+    public Board(Board other) {
+        this.rows = other.rows;
+        this.cols = other.cols;
+        this.grid = new char[rows][cols];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; i < cols; i++) {
+                grid[i][j] = other.grid[i][j];
+            }
+        }
+    }
+
     public int getRows() { return rows; }
     public int getCols() { return cols; }
 
     public void printBoard() {
-        System.out.print("   ");
-        for (int j = 0; j < cols; j++) {
-            System.out.printf("%3d", j);
-        }
-        System.out.println();
-        
-        System.out.print("   ");
-        for (int j = 0; j < cols; j++) {
-            System.out.print("---");
-        }
-        System.out.println();
-        
         for (int i = 0; i < rows; i++) {
-            System.out.printf("%2d |", i);
             for (int j = 0; j < cols; j++) {
                 String cellStr = " " + grid[i][j] + " ";
                 
                 if (grid[i][j] == '.') {
                     System.out.print(cellStr);
-                } else if (grid[i][j] == 'T') {
-                    System.out.print("\033[33m" + cellStr + "\033[0m");
                 } else {
                     int pieceNum = grid[i][j] - '0';
                     String colorCode = getColorForPiece(pieceNum);
                     System.out.print(colorCode + cellStr + "\033[0m");
                 }
             }
-            System.out.print("|");
             System.out.println();
-        }
-        System.out.print("    ");
-        for (int j = 0; j < cols; j++) {
-            System.out.print("---");
         }
     }
     

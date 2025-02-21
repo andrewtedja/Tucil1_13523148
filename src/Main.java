@@ -62,7 +62,7 @@ public class Main {
         
         // Start solving process
         boolean solved = solver.solve(board, pieceList);
-        
+
         if (solved) {
             System.out.println("\nSolution found!");
             System.out.println("Final Solved Board:");
