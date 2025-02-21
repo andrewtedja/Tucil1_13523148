@@ -1,0 +1,182 @@
+.root {
+	-fx-background-color: #ffffff;
+	-fx-font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.container {
+	-fx-background-color: #1f1912;
+	-fx-background-radius: 10px;
+	-fx-padding: 30px;
+	-fx-max-width: 500px;
+}
+
+.title-label {
+	-fx-font-size: 46px;
+	-fx-font-weight: bold;
+	-fx-text-fill: #ffffff;
+	-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 1, 0, 0, 1);
+}
+
+.subtitle-label {
+	-fx-font-size: 14px;
+	-fx-text-fill: #feffd9;
+	-fx-padding: 0 0 20 0;
+}
+
+.upload-btn {
+	-fx-background-color: #83884e;
+	-fx-text-fill: white;
+	-fx-font-size: 14px;
+	-fx-font-weight: bold;
+	-fx-padding: 20px 24px;
+	-fx-background-radius: 5px;
+	-fx-cursor: hand;
+	-fx-min-width: 200px;
+}
+
+.upload-btn:hover {
+	-fx-background-color: #5b5e36;
+}
+
+.upload-btn:pressed {
+	-fx-background-color: #3a3c22;
+}
+
+.exit-btn {
+	-fx-background-color: #a0522d;
+	-fx-border-width: 1px;
+	-fx-text-fill: #ffffff;
+	-fx-font-size: 14px;
+	-fx-padding: 8px 24px;
+	-fx-background-radius: 5px;
+	-fx-border-radius: 5px;
+	-fx-cursor: hand;
+	-fx-min-width: 200px;
+}
+
+.exit-btn:hover {
+	-fx-background-color: #7d3b1c;
+}
+
+.exit-btn:pressed {
+	-fx-background-color: #5d270f;
+}
+
+.other-btn {
+	-fx-background-color: transparent;
+	-fx-border-color: #cbd5e0;
+	-fx-border-width: 1px;
+	-fx-text-fill: #4a5568;
+	-fx-font-size: 14px;
+	-fx-padding: 12px 24px;
+	-fx-background-radius: 5px;
+	-fx-border-radius: 5px;
+	-fx-cursor: hand;
+	-fx-min-width: 200px;
+}
+
+.other-btn:hover {
+	-fx-background-color: #f7fafc;
+	-fx-border-color: #a0aec0;
+}
+
+.other-btn:pressed {
+	-fx-background-color: #edf2f7;
+}
+
+VBox VBox {
+	-fx-padding: 10px 0 0 0;
+}
+.top-bar {
+	-fx-background-color: #2d2d2d;
+	-fx-padding: 12px 15px;
+	-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 3, 0, 0, 1);
+}
+
+/* ! second */
+
+.border-pane {
+	-fx-background-color: #1f1912;
+}
+
+.top-vbox,
+.top-hbox {
+	-fx-background-color: #1f1912;
+	-fx-padding: 10px;
+}
+
+.back-btn {
+	-fx-background-color: #517444;
+	-fx-padding: 5px 10px;
+	-fx-text-fill: #fffdd0;
+	-fx-font-weight: bold;
+	-fx-cursor: hand;
+}
+
+.back-btn:hover {
+	-fx-background-color: #364e2e;
+}
+
+.filename,
+.status-label {
+	-fx-text-fill: #fffdd0;
+}
+
+.center-splitpane {
+	-fx-background-color: #ffded0;
+}
+
+.puzzle-vbox,
+.info-vbox {
+	-fx-background-color: #fff8dc;
+	-fx-border-color: #1f1912;
+	-fx-border-width: 2px;
+	-fx-border-radius: 5px;
+}
+
+.puzzle-board-label,
+.puzzle-info-label,
+.results-label {
+	-fx-font-size: 16px;
+	-fx-font-weight: bold;
+	-fx-text-fill: #1f1912;
+}
+
+.results-label {
+	-fx-padding: 10px 0 0 0;
+}
+
+.board-canvas {
+	-fx-border-color: #1f1912;
+	-fx-border-width: 2px;
+}
+
+.controls-hbox {
+	-fx-background-color: #fff8dc;
+}
+
+.cli-debug-checkbox {
+	-fx-text-fill: #1f1912;
+}
+
+.solve-btn,
+.stop-btn {
+	-fx-background-color: #dc7a35;
+	-fx-text-fill: #fffdd0;
+	-fx-font-weight: bold;
+	-fx-cursor: hand;
+}
+
+.solve-btn:hover,
+.stop-btn:hover {
+	-fx-background-color: #9b5625;
+}
+
+.info-label,
+.statistics-label {
+	-fx-text-fill: #1f1912;
+}
+
+.info-separator {
+	-fx-background-color: #4c280e;
+}

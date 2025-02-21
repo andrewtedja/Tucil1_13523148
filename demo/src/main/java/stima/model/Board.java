@@ -28,20 +28,16 @@ public class Board {
 
     // ? MAIN FUNCTIONS
     public void printBoard() {
-        System.out.print("   ");
-        for (int j = 0; j < cols; j++) {
-            System.out.printf("%3d", j);
-        }
         System.out.println();
         
-        System.out.print("   ");
+        System.out.print(" ");
         for (int j = 0; j < cols; j++) {
             System.out.print("---");
         }
         System.out.println();
         
         for (int i = 0; i < rows; i++) {
-            System.out.printf("%2d |", i);
+            System.out.printf("|");
             for (int j = 0; j < cols; j++) {
                 String cellStr = " " + grid[i][j] + " ";
                 
@@ -56,7 +52,7 @@ public class Board {
             System.out.print("|");
             System.out.println();
         }
-        System.out.print("    ");
+        System.out.print(" ");
         for (int j = 0; j < cols; j++) {
             System.out.print("---");
         }

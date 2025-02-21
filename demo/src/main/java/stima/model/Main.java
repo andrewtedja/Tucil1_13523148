@@ -60,7 +60,7 @@ public class Main {
         System.out.println("Number of pieces loaded: " + pieceList.size());
         System.out.println();
         
-        boolean visualize = false;
+        boolean visualize = true;
         Solver solver = new Solver(visualize);
         
         // Start solving process

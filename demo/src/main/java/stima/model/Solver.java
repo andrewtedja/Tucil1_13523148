@@ -42,7 +42,6 @@ public class Solver {
                 for (Piece orientation: piece.getAllOrientations()) {
                     if (board.canPlacePiece(orientation, i, j)) {
                         if (showTesting) {
-                            clearConsole();
                             board.printBoard();
                         }
                         
@@ -55,7 +54,6 @@ public class Solver {
                         
                         // ! BACKTRACKING
                         if (showTesting) {
-                            clearConsole();
                             board.printBoard();
                         }
                         board.removePiece(orientation, i, j);

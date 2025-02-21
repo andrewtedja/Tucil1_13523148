@@ -19,13 +19,13 @@ public class PrimaryController {
     @FXML
     public void initialize() {
         titleLabel.setText("IQ Puzzler Solver");
-        subtitleLabel.setText("A backtracking algorithm for puzzle solving");
+        subtitleLabel.setText("Tucil 1 - IF2211 Strategi Algoritma");
     }
 
     @FXML
     private void handleLoadFile() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Puzzle File");
+        fileChooser.setTitle("Load Puzzle File");
         fileChooser.getExtensionFilters().add(
             new FileChooser.ExtensionFilter("Text Files", "*.txt")
         );
@@ -36,8 +36,7 @@ public class PrimaryController {
                 App.loadFile(selectedFile.getAbsolutePath());
                 switchToSecondary();
             } catch (Exception e) {
-                // Show error dialog
-                System.err.println("Error loading file: " + e.getMessage());
+                System.err.println("Error!!!: " + e.getMessage());
             }
         }
     }

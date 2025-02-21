@@ -48,10 +48,11 @@ public class SecondaryController {
 
         // Display pieces
         StringBuilder info = new StringBuilder();
-        info.append("File IQPuzzler Information: ");
-        info.append("Board Size: ").append(fileData.getN()).append(" × ").append(fileData.getM()).append("\n");
-        info.append("Puzzle Type: ").append(fileData.getS()).append("\n");
-        info.append("Number of Pieces: ").append(pieceList.size());
+        info.append("File IQPuzzler Information:\n");
+        info.append("Board Rows (N): ").append(fileData.getN()).append("\n");
+        info.append("Board Columns (M): ").append(fileData.getM()).append("\n");
+        info.append("Puzzle Type (S): ").append(fileData.getS()).append("\n");
+        info.append("Number of Pieces (P): ").append(pieceList.size());
         infoLabel.setText(info.toString());
 
         drawEmptyBoard();
@@ -165,7 +166,7 @@ public class SecondaryController {
             }
 
             App.setSolved(result);
-            App.setStatistics(solver.getAttempt(), solver.getRuntime());
+            App.setStatistics(solver.getRuntime(), solver.getAttempt());
 
             Platform.runLater(() -> {
                 if (result) {
@@ -191,7 +192,7 @@ public class SecondaryController {
         if (solver != null) {
             solver.stop();
             if (solverThread != null && solverThread.isAlive()) {
-                solverThread.interrupt();
+                solverThread.interrupt(); // stop thread (still fix)
             }
 
             if (updateTimer != null) {
