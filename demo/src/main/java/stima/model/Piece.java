@@ -9,11 +9,10 @@ public class Piece {
     private char[][] shape;
     private int rows;
     private int cols;
-    private int id;
+    private char id;
     private List<Piece> allOrientations;
 
-    // ? Constructor
-    public Piece(char[][] shape, int id) {
+    public Piece(char[][] shape, char id) {
         this.shape = shape;
         this.rows = shape.length;
         this.cols = shape[0].length;
@@ -26,11 +25,11 @@ public class Piece {
         return shape;
     }
     
-    public int getId() {
+    public char getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(char id) {
         this.id = id;
     }
 

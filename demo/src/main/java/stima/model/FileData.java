@@ -8,7 +8,6 @@ public class FileData {
     private char[][] matrix;
     private ArrayList<Piece> pieceList; 
 
-    // Constructor
     public FileData(int N, int M, int P, String S, char[][] matrix, ArrayList<Piece> pieceList) {
         this.N = N;
         this.M = M;

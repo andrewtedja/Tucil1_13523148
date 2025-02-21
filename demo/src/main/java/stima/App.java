@@ -24,6 +24,11 @@ public class App extends Application {
     private static FileData fileData;
     private static String currentFileName = "";
     private static boolean solved = false;
+    private static boolean debugWriteToFile = false;
+    private static String folderPath = "test";
+    private static String filePath = "output.txt";
+    public static boolean writeSolutionToOutput = false;
+
     private static int attempts = 0;
     private static int runtime = 0;
     
@@ -60,6 +65,22 @@ public class App extends Application {
     
     public static String getCurrentFileName() {
         return currentFileName;
+    }
+
+    public boolean getWriteSolutionToOutput(String folderPath, String filePath) {
+        return writeSolutionToOutput;
+    }
+
+    public static String getFolderPath() {
+        return folderPath;
+    }
+
+    public static boolean getDebugWriteToFile() {
+        return debugWriteToFile;
+    }
+
+    public static String getFilePath() {
+        return filePath;
     }
     
     public static boolean isSolved() {

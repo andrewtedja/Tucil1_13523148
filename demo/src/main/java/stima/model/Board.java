@@ -1,5 +1,10 @@
 package stima.model;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 public class Board {
     private char[][] grid;
     private int rows;
@@ -28,17 +33,9 @@ public class Board {
 
     // ? MAIN FUNCTIONS
     public void printBoard() {
-        System.out.println();
-        
-        System.out.print(" ");
-        for (int j = 0; j < cols; j++) {
-            System.out.print("---");
-        }
-        System.out.println();
-        
-        for (int i = 0; i < rows; i++) {
-            System.out.printf("|");
-            for (int j = 0; j < cols; j++) {
+        for (int i = 0; i<rows; i++) {
+            System.out.println();
+            for (int j = 0; j<cols; j++) {
                 String cellStr = " " + grid[i][j] + " ";
                 
                 if (grid[i][j] == '.') {
@@ -49,13 +46,8 @@ public class Board {
                     System.out.print(colorCode + cellStr + "\033[0m");
                 }
             }
-            System.out.print("|");
-            System.out.println();
         }
-        System.out.print(" ");
-        for (int j = 0; j < cols; j++) {
-            System.out.print("---");
-        }
+        System.out.println();
     }
     
     private String getColorForPiece(int pieceId) {
@@ -102,7 +94,7 @@ public class Board {
     }
 
     public boolean placePiece(Piece piece, int startRow, int startCol) {
-        return placePiece(piece, startRow, startCol, piece.getShape()[0][0]);
+        return placePiece(piece, startRow, startCol, piece.getId());
     }
     
     public boolean placePiece(Piece piece, int startRow, int startCol, char pieceChar) {
@@ -110,7 +102,7 @@ public class Board {
             return false;
         }
         char[][] shape = piece.getShape();
-        for (int i = 0; i < shape.length; i++) {
+        for (int i = 0; i< shape.length; i++) {
             for (int j = 0; j < shape[0].length; j++) {
                 if (shape[i][j] != '.') {
                     grid[startRow + i][startCol + j] = pieceChar;
@@ -131,4 +123,25 @@ public class Board {
         }
     }
 
+    public void writeSolutionToOutput(String folderPath, String filePath) {
+        File folder = new File(folderPath);
+
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
+
+        String fullPath = folderPath + File.separator + filePath;
+        try (PrintWriter writer = new PrintWriter(new FileWriter(fullPath))) {
+            for (int i = 0 ; i < rows; i++) {
+                StringBuilder line = new StringBuilder();
+                for (int j = 0;  j < cols; j++) {
+                    line.append(grid[i][j]);
+                }
+                writer.println(line.toString());
+            }
+        } catch (IOException e) {
+        System.err.println("Error writing: " + e.getMessage());
+        }
+    }
 }
+

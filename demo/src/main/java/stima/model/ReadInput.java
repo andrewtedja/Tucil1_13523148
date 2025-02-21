@@ -34,22 +34,36 @@ public class ReadInput {
         // [{ a,  }]
         
         char[][] normalizedPiece = new char[pieceRows.size()][maxW];
+
+        
+        char pieceChar = '.';
+        for (char[] row : pieceRows) {
+            for (char c : row) {
+                if (c != ' ' && c != '.') {
+                    pieceChar = c;
+                    break;
+                }
+            }
+            if (pieceChar != '.') break;
+        }
+        
         for (int i = 0; i < pieceRows.size(); i++) {
             char[] originalRow = pieceRows.get(i);
             for (int j = 0; j < maxW; j++) {
+                // System.out.println("j: " + j);
                 if (j < originalRow.length) {
-            if (originalRow[j] == ' ') {
-                normalizedPiece[i][j] = '.';
-            } else {
-                normalizedPiece[i][j] = originalRow[j];
-            }
+                    if (originalRow[j] == ' ') {
+                        normalizedPiece[i][j] = '.';
+                    } else {
+                        normalizedPiece[i][j] = originalRow[j];
+                    }
                 } else {
                     normalizedPiece[i][j] = '.';
                 }
             }
         }
         
-        pieceList.add(new Piece(normalizedPiece, pieceList.size() + 1));
+        pieceList.add(new Piece(normalizedPiece, pieceChar));
     }
     // * Read file -> Matrix
     public static FileData readFile(String filename) {
@@ -101,12 +115,13 @@ public class ReadInput {
             return pieceList;
         }
 
-        char currChar = 0; // ! invalid char
+        char currChar = 0; 
 
         for (char[] row : matrix) {
             char leadingChar = leadingNonSpace(row);
 
             if (leadingChar == ' ') {
+                // System.out.println(leadingChar);
                 continue;
             } 
             if (leadingChar != currChar && !tempPiece.isEmpty()) {

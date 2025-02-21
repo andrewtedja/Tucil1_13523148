@@ -20,7 +20,7 @@
 .subtitle-label {
 	-fx-font-size: 14px;
 	-fx-text-fill: #feffd9;
-	-fx-padding: 0 0 20 0;
+	-fx-padding: 0 0 10 0;
 }
 
 .upload-btn {
@@ -105,7 +105,8 @@ VBox VBox {
 	-fx-padding: 10px;
 }
 
-.back-btn {
+.back-btn,
+.confirm-btn {
 	-fx-background-color: #517444;
 	-fx-padding: 5px 10px;
 	-fx-text-fill: #fffdd0;
@@ -113,8 +114,9 @@ VBox VBox {
 	-fx-cursor: hand;
 }
 
-.back-btn:hover {
-	-fx-background-color: #364e2e;
+.back-btn:hover,
+.confirm-btn:hover {
+	-fx-background-color: #3b5e2e;
 }
 
 .filename {
@@ -187,8 +189,19 @@ VBox VBox {
 .info-label,
 .statistics-label {
 	-fx-text-fill: #1f1912;
+	-fx-padding: 0 0 5px 0;
 }
 
 .info-separator {
 	-fx-background-color: #4c280e;
+}
+
+.input-save {
+	-fx-background-color: #e2e8f0;
+	-fx-border-color: #cbd5e0;
+	-fx-border-width: 1px;
+	-fx-border-radius: 3px;
+	-fx-padding: 5px;
+	-fx-text-fill: #2d3748;
+	-fx-font-size: 14px;
 }

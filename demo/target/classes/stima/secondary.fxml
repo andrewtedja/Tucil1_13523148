@@ -31,7 +31,7 @@
 
                 <Canvas fx:id="boardCanvas" width="400" height="400" styleClass="board-canvas"/>
                 <HBox alignment="CENTER" spacing="15" styleClass="controls-hbox">
-                    <CheckBox text="CLI Visualization (Slower)" onAction="#toggleVisualization" styleClass="cli-debug-checkbox"/>
+                    <CheckBox text="Debug / CLI Visualize" onAction="#toggleDebug" styleClass="cli-debug-checkbox"/>
                     <Button fx:id="solveButton" text="Solve" onAction="#handleSolve" styleClass="solve-btn"/>
                     <Button fx:id="stopButton" text="Stop" onAction="#handleStop" styleClass="stop-btn"/>
                 </HBox>
@@ -46,8 +46,16 @@
                 <Separator styleClass="info-separator"/>
                 <Label text="Results" styleClass="results-label"/>
                 <Label fx:id="statisticsLabel" wrapText="true" styleClass="statistics-label"/>
+                <Label fx:id="statisticsLabel" wrapText="true" styleClass="statistics-label"/>
+
+                <Label fx:id="saveInputLabel" text="Apakah anda ingin menyimpan solusi? (ya/tidak)" visible="false"/>
+                <HBox spacing="10" styleClass="input-hbox">
+                    <TextField fx:id="saveResponseField" promptText="ya/tidak'" styleClass="input-save" visible="false"/>
+                    <Button fx:id="saveConfirmButton" text="Confirm" onAction="#handleSaveConfirm" styleClass="confirm-btn" visible="false"/>
+                </HBox>
             </VBox>
         </SplitPane>
     </center>
 </BorderPane>
+
 

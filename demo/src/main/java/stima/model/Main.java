@@ -45,7 +45,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        String fileName = "test/file.txt";
+        String fileName = "test/file2.txt";
         FileData fileData = ReadInput.readFile(fileName);
 
         Board board = new Board(fileData);
@@ -59,13 +59,18 @@ public class Main {
         System.out.println("S (Type) = " + fileData.getS());
         System.out.println("Number of pieces loaded: " + pieceList.size());
         System.out.println();
-        
-        boolean visualize = true;
-        Solver solver = new Solver(visualize);
+
+        // TESTIONG
+        String folderPath = "test";
+        String filePath = "output.txt";
+
+
+        boolean visualize = false;
+        Solver solver = new Solver(visualize, true, folderPath, filePath);
         
         // Start solving process
         boolean solved = solver.solve(board, pieceList);
-        
+
         if (solved) {
             System.out.println("\nSolution found!");
             System.out.println("Final Solved Board:");
@@ -75,6 +80,9 @@ public class Main {
             System.out.println("Final Board State (incomplete):");
             board.printBoard();
         }
+
+
+        board.writeSolutionToOutput(folderPath, filePath);
 
         System.out.println("\nSolver Statistics:");
         System.out.println("Number of attempts: " + solver.getAttempt());
