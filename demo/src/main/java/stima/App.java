@@ -65,7 +65,7 @@ public class App extends Application {
         return solved;
     }
 
-    public static void setSolver() {
+    public static void setSolved(boolean isSolved) {
         solved = isSolved();
     }
 
