@@ -104,6 +104,7 @@ public class ReadInput {
             // ? REST (Pieces Matrix)
             String line;
             while ((line = reader.readLine()) != null) {
+                // remove trailing (after alphabet) spaces
                 if (!line.trim().isEmpty()) {
                     matrixList.add(line.stripTrailing().toCharArray());
                 }
@@ -160,7 +161,7 @@ public class ReadInput {
         return pieceList;
     }
 
-    // * MAIN TEST
+    // * MAIN
     // public static void main(String[] args) {
     //     String fileName = "src/file.txt";
     //     FileData fileData = readFile(fileName);
