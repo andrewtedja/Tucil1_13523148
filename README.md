@@ -5,11 +5,12 @@
 ## Table of Contents
 
 -   [Description](#description)
+-   [Pre-requisites](#pre-requisites)
 -   [Features](#features)
--   [Screenshots](#screenshots)
 -   [How to Run](#how-to-run)
 -   [Bonus Status](#bonus-status)
 -   [Technologies Used](#technologies-used)
+-   [Screenshots](#screenshots)
 -   [Room for Improvement](#room-for-improvement)
 -   [Project Structure](#project-structure)
 -   [Authors](#authors)
@@ -47,7 +48,7 @@ This project is a solution finder for the IQ Puzzler Pro game implemented using 
     mvn javafx:run
     ```
 
-## Features
+## 🌐 Features
 
 -   Reading file input upload from (.txt) file
 -   Solving the IQPuzzler Pro using Brute force Algorithm
@@ -56,7 +57,7 @@ This project is a solution finder for the IQ Puzzler Pro game implemented using 
 -   Show the solution of the board in both GUI and CLI, and also the statistics for runtime and iteration cases of the solving process
 -   Allows user to save the solution in the in both matrix form (test/output.txt) and also image (test/solution.png)
 
-## Screenshots
+## 📷 Screenshots
 
 ![Front Page](./img/front_page.png)
 ![Solved Page](./img/solved_page.png)
@@ -65,7 +66,7 @@ This project is a solution finder for the IQ Puzzler Pro game implemented using 
 
 ![Save Solution (test/output.txt)](./img/save_output_txt.png)
 
-## Bonus Status
+## 🎁 Bonus Status
 
 -   GUI ✅
 -   Save to Image ✅
@@ -109,13 +110,13 @@ Tucil1_13523148
 │   └── solution.png
 └── README.md
 
-## Technologies Used
+## 🛠️ Technologies Used
 
--   **Java Development Kit (JDK)**: Version 11 or higher (tested on JDK 17)
+-   **JDK**: Version 11 or higher (tested on JDK 17)
 -   **JavaFX**: For GUI
 -   **Maven**: For dependency management
 
-## Room for Improvement
+## 🚧 Room for Improvement
 
 -   Enhance type for custom and pyramid puzzle boards
 -   Enhance speed and efficacy of the algorithm solver
