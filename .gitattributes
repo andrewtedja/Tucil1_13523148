@@ -1,2 +1,1 @@
-*.java linguist-detectable=true
-docs/* linguist-detectable=false
+demo/* linguist-documentation=false
