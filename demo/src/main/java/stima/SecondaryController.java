@@ -91,6 +91,8 @@ public class SecondaryController {
 
         GraphicsContext gc = boardCanvas.getGraphicsContext2D();
         gc.clearRect(0, 0, boardCanvas.getWidth(), boardCanvas.getHeight());
+
+        
         gc.setStroke(Color.BLACK); 
         for (int i = 0; i <= rows; i++) {
             gc.strokeLine(0, i * cellSize, cols * cellSize, i * cellSize);
@@ -99,7 +101,42 @@ public class SecondaryController {
             gc.strokeLine(j * cellSize, 0, j * cellSize, rows * cellSize);
         }
     }
+    
+    private void drawBoard(Board board) {
+        if (board == null) return;
+        
+        int rows = board.getRows();
+        int cols = board.getCols();
+        
+        double cellSize = Math.min(
+            boardCanvas.getWidth() / cols,
+            boardCanvas.getHeight() / rows
+        );
+        
+        GraphicsContext gc = boardCanvas.getGraphicsContext2D();
+        gc.clearRect(0, 0, boardCanvas.getWidth(), boardCanvas.getHeight());
+        gc.setFont(new javafx.scene.text.Font(cellSize / 5)); 
+        gc.setTextAlign(javafx.scene.text.TextAlignment.CENTER);
+        gc.setTextBaseline(javafx.geometry.VPos.CENTER);
 
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                char cell = board.getCell(i, j);
+
+                if (cell != '.') {
+                    // System.out.println("asd!");
+                    int pieceId = cell - '0';
+                    gc.setFill(getPieceColor(pieceId));
+                    gc.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
+                    
+                    gc.setFill(Color.BLACK); 
+                    gc.fillText(String.valueOf(cell), (j + 0.5) * cellSize, (i + 0.5) * cellSize);
+                }
+                gc.setStroke(Color.BLACK);
+                gc.strokeRect(j * cellSize, i * cellSize, cellSize, cellSize);
+            }
+        }
+    }
 
     private Color getPieceColor(int pieceId) {
         switch (pieceId % 26) {
@@ -165,36 +202,65 @@ public class SecondaryController {
         }
     }
 
-    private void drawBoard(Board board) {
-        if (board == null) return;
-        
+
+    
+    private void showSaveInput() {
+        saveInputLabel.setVisible(true);
+        saveResponseField.setVisible(true);
+        saveConfirmButton.setVisible(true);
+        saveResponseField.clear(); 
+    }
+    
+    private void hideSaveInput() {
+        saveInputLabel.setVisible(false);
+        saveResponseField.setVisible(false);
+        saveConfirmButton.setVisible(false);
+    }
+
+    // ! SAVE SOLUTION AS IMAEG (BONUS)
+    private void saveSolutionAsImage(Board board, String folderPath, String filePath)  {
         int rows = board.getRows();
         int cols = board.getCols();
-        
-        double cellSize = Math.min(
-            boardCanvas.getWidth() / cols,
-            boardCanvas.getHeight() / rows
-        );
-        
-        GraphicsContext gc = boardCanvas.getGraphicsContext2D();
-        gc.clearRect(0, 0, boardCanvas.getWidth(), boardCanvas.getHeight());
+        int cellsize = 100;
+        int width = cols * cellsize;
+        int height = rows * cellsize;
 
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2d = image.createGraphics();
+        g2d.setColor(java.awt.Color.WHITE);
+        g2d.fillRect(0, 0, width, height);
+
+        g2d.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, cellsize / 5)); 
+        g2d.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+        
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 char cell = board.getCell(i, j);
-
                 if (cell != '.') {
-                    // System.out.println("asd!");
                     int pieceId = cell - '0';
-                    gc.setFill(getPieceColor(pieceId));
-                    gc.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
+                    g2d.setColor(getAWTPieceColor(pieceId));
+                    g2d.fillRect(j * cellsize, i * cellsize, cellsize, cellsize);
+
+                    g2d.setColor(java.awt.Color.BLACK);
+                    g2d.drawString(String.valueOf(cell), (int)((j + 0.5) * cellsize), (int)((i + 0.5) * cellsize));
                 }
-                gc.setStroke(Color.BLACK);
-                gc.strokeRect(j * cellSize, i * cellSize, cellSize, cellSize);
+                g2d.setColor(java.awt.Color.BLACK);
+                g2d.drawRect(j * cellsize, i * cellsize, cellsize, cellsize);
             }
         }
+        g2d.dispose();
+        File folder = new File(folderPath);
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
+        File outputFile = new File(folderPath + File.separator + filePath);
+        try {
+            ImageIO.write(image, "png", outputFile);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
     }
-
+    
     @FXML
     private void handleSolve() {
         solveButton.setDisable(true);
@@ -243,6 +309,7 @@ public class SecondaryController {
                     } else {
                         statusLabel.setText("No solution!");
                         hideSaveInput();
+                        solveButton.isDisable();
                     }
                     
                     drawBoard(board);
@@ -257,59 +324,6 @@ public class SecondaryController {
         };
         new Thread(solverTask).start();
     }
-
-    private void showSaveInput() {
-        saveInputLabel.setVisible(true);
-        saveResponseField.setVisible(true);
-        saveConfirmButton.setVisible(true);
-        saveResponseField.clear(); 
-    }
-
-    private void hideSaveInput() {
-        saveInputLabel.setVisible(false);
-        saveResponseField.setVisible(false);
-        saveConfirmButton.setVisible(false);
-    }
-
-
-    // ! SAVE SOLUTION AS IMAEG (BONUS)
-    private void saveSolutionAsImage(Board board, String folderPath, String filePath)  {
-        int rows = board.getRows();
-        int cols = board.getCols();
-        int cellsize = 100;
-        int width = cols * cellsize;
-        int height = rows * cellsize;
-
-        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2d = image.createGraphics();
-        g2d.setColor(java.awt.Color.WHITE);
-        g2d.fillRect(0, 0, width, height);
-
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                char cell = board.getCell(i, j);
-                if (cell != '.') {
-                    int pieceId = cell - '0';
-                    g2d.setColor(getAWTPieceColor(pieceId));
-                    g2d.fillRect(j * cellsize, i * cellsize, cellsize, cellsize);
-                }
-                g2d.setColor(java.awt.Color.BLACK);
-                g2d.drawRect(j * cellsize, i * cellsize, cellsize, cellsize);
-            }
-        }
-        g2d.dispose();
-        File folder = new File(folderPath);
-        if (!folder.exists()) {
-            folder.mkdirs();
-        }
-        File outputFile = new File(folderPath + File.separator + filePath);
-        try {
-            ImageIO.write(image, "png", outputFile);
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-        }
-    }
-
     @FXML
     private void handleSaveConfirm() {
         String response = saveResponseField.getText().trim();
@@ -371,4 +385,6 @@ public class SecondaryController {
         App.setRoot("primary");
     }
 }
+
+
 

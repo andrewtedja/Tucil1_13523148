@@ -25,7 +25,7 @@ public class App extends Application {
     private static String currentFileName = "";
     private static boolean solved = false;
     private static boolean debugWriteToFile = false;
-    private static String folderPath = "test";
+    private static String folderPath = "../test";
     private static String filePath = "output.txt";
     public static boolean writeSolutionToOutput = false;
 

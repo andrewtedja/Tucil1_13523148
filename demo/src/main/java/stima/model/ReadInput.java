@@ -14,6 +14,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ReadInput {
     // ? HELPER FUNCTION
@@ -116,6 +118,15 @@ public class ReadInput {
         
         if (pieceList.size() != P) {
             throw new IllegalArgumentException("Number of pieces does not match P!");
+        }
+
+        // * SAME ALPHABET PIECES VALIDATION
+        Set<Character> uniqueAlphabet = new HashSet<>();
+        for (Piece piece : pieceList) {
+            if (uniqueAlphabet.contains(piece.getId())) {
+                throw new IllegalArgumentException("Pieces must have unique alphabets! (Duplicate Piece)");
+            }
+            uniqueAlphabet.add(piece.getId());
         }
 
         return new FileData(N, M, P, S, matrixList.toArray(new char[0][]), pieceList);
