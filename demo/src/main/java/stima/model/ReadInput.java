@@ -119,10 +119,13 @@ public class ReadInput {
         if (pieceList.size() != P) {
             throw new IllegalArgumentException("Number of pieces does not match P!");
         }
-
+        
         // * SAME ALPHABET PIECES VALIDATION
         Set<Character> uniqueAlphabet = new HashSet<>();
         for (Piece piece : pieceList) {
+            if (!Character.isUpperCase(piece.getId())) {
+                throw new IllegalArgumentException("Pieces must be in uppercase!");
+            }
             if (uniqueAlphabet.contains(piece.getId())) {
                 throw new IllegalArgumentException("Pieces must have unique alphabets! (Duplicate Piece)");
             }
@@ -192,6 +195,7 @@ public class ReadInput {
     //     }
     // }
 }
+
 
 
 
