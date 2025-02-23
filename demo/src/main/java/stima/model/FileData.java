@@ -17,7 +17,7 @@ public class FileData {
         this.pieceList = pieceList;
     }
 
-    // Getters and Setters
+    // ? Getters and Setters
     public int getN() {
         return N;
     }
