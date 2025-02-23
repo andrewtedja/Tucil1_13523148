@@ -111,8 +111,7 @@ Tucil1_13523148
 └── README.md
 
 ## 🛠️ Technologies Used
-
--   **JDK**: Version 11 or higher (tested on JDK 17)
+-   **Java & JDK**: Version 11 or higher (tested on JDK 17)
 -   **JavaFX**: For GUI
 -   **Maven**: For dependency management
 
@@ -124,7 +123,19 @@ Tucil1_13523148
 
 ## 🪪 Author
 
-| NIM      | Nama                                                  |
-| -------- | ----------------------------------------------------- |
-| 13523148 | [Andrew Tedjapratama](https://github.com/andrewtedja) |
+<table>
+    <thead>
+        <tr>
+            <th>NIM</th>
+            <th>Nama</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>13523148</td>
+            <td><a href="https://github.com/andrewtedja">Andrew Tedjapratama</a></td>
+        </tr>
+    </tbody>
+</table>
+
 ```
