@@ -110,7 +110,10 @@ Tucil1_13523148
 │   └── solution.png
 └── README.md
 
+```
+
 ## 🛠️ Technologies Used
+
 -   **Java & JDK**: Version 11 or higher (tested on JDK 17)
 -   **JavaFX**: For GUI
 -   **Maven**: For dependency management
@@ -137,5 +140,3 @@ Tucil1_13523148
         </tr>
     </tbody>
 </table>
-
-```
