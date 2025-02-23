@@ -58,7 +58,7 @@ public class Board {
         if (pieceId % 7 == 4) return "\033[36m"; // Cyan
         if (pieceId % 7 == 5) return "\033[33m"; // Yellow
         if (pieceId % 7 == 6) return "\033[37m"; // White
-        return "\033[0m"; // Default/Reset
+        return "\033[0m"; 
     }
 
     public boolean canPlacePiece(Piece piece, int startRow, int startCol) {
@@ -70,7 +70,7 @@ public class Board {
         if (startRow < 0 || startCol < 0 || startRow + pieceRows > rows || startCol + pieceCols > cols) {
             return false;
         }
-        // check if piece overlap
+        // check if piece overlap (already .)
         for (int i = 0; i < pieceRows; i++) {
             for (int j = 0; j < pieceCols; j++) {
                 if (shape[i][j] != '.' && grid[startRow + i][startCol + j] != '.') {
