@@ -11,6 +11,7 @@
 -   [Bonus Status](#bonus-status)
 -   [Technologies Used](#technologies-used)
 -   [Room for Improvement](#room-for-improvement)
+-   [Project Structure](#project-structure)
 -   [Authors](#authors)
 
 ## 📝 Description
@@ -69,6 +70,45 @@ This project is a solution finder for the IQ Puzzler Pro game implemented using 
 -   GUI ✅
 -   Save to Image ✅
 
+## 📁 Project Structure
+
+```bash
+Tucil1_13523148
+├── demo
+│   ├── src
+│   │   └── main
+│   │       ├── java
+│   │       │   └── stima
+│   │       │       ├── model
+│   │       │       │   ├── Main.java
+│   │       │       │   ├── Board.java
+│   │       │       │   ├── Piece.java
+│   │       │       │   ├── Solver.java
+│   │       │       │   ├── ReadInput.java
+│   │       │       │   └── FileData.java
+│   │       │       ├── App.java
+│   │       │       ├── PrimaryController.java
+│   │       │       └── SecondaryController.java
+│   │       └── resources
+│   │           ├── stima
+│   │           │   ├── primary.fxml
+│   │           │   └── secondary.fxml
+│   │           └── stima.css
+│   └── target
+│       ├── classes
+│       │   └── stima
+│       │       ├── model
+│       │       ├── App.class
+│       │       ├── PrimaryController.class
+│       │       └── SecondaryController.class
+│       └── demo-1.0-SNAPSHOT.jar
+├── doc
+├── img
+├── test
+│   ├── output.txt
+│   └── solution.png
+└── README.md
+
 ## Technologies Used
 
 -   **Java Development Kit (JDK)**: Version 11 or higher (tested on JDK 17)
@@ -86,3 +126,4 @@ This project is a solution finder for the IQ Puzzler Pro game implemented using 
 | NIM      | Nama                                                  |
 | -------- | ----------------------------------------------------- |
 | 13523148 | [Andrew Tedjapratama](https://github.com/andrewtedja) |
+```
