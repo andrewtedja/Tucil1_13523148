@@ -20,19 +20,6 @@ public class Piece {
         this.allOrientations = null;
     }
 
-    // ? Getters and Setters
-    public char[][] getShape() {
-        return shape;
-    }
-    
-    public char getId() {
-        return id;
-    }
-
-    public void setId(char id) {
-        this.id = id;
-    }
-
     // Rotate 90
     public Piece rotate() {
         if (shape == null || shape.length == 0 || shape[0].length == 0) {
@@ -57,22 +44,10 @@ public class Piece {
         return new Piece(flipped, id);
     }
 
-    public Piece flipVertical() {
-        char[][] flipped = new char[rows][cols];
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                flipped[rows - 1 - i][j] = shape[i][j];
-            }
-        }
-        return new Piece(flipped, id);
-    }
-
     public List<Piece> getAllOrientationsList() {
         Set<String> uniqueOrientations = new HashSet<>();
         List<Piece> orientations = new ArrayList<>();
         Piece current = this;
-
-        // 4 rotations (0, 90, 180, 270) and flipped horizontally
         for (int r = 0; r < 4; r++) {
             addIfUnique(orientations, uniqueOrientations, current);
 
@@ -92,7 +67,6 @@ public class Piece {
         }
         return allOrientations;
     }
-    // ? Helpers
     private void addIfUnique(List<Piece> orientations, Set<String> uniqueOrientations, Piece piece) {
         String rep = pieceToString(piece.getShape());
         if (uniqueOrientations.add(rep)) {
@@ -106,5 +80,29 @@ public class Piece {
             sb.append(Arrays.toString(row));
         }
         return sb.toString();
+    }
+
+    
+    // ? Getters and Setters
+    public char[][] getShape() {
+        return shape;
+    }
+    
+    public char getId() {
+        return id;
+    }
+
+    public void setId(char id) {
+        this.id = id;
+    }
+
+    public Piece flipVertical() {
+        char[][] flipped = new char[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                flipped[rows - 1 - i][j] = shape[i][j];
+            }
+        }
+        return new Piece(flipped, id);
     }
 }

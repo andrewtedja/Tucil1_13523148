@@ -36,13 +36,16 @@ This project is a solution finder for the IQ Puzzler Pro game implemented using 
     git clone https://github.com/andrewtedja/Tucil1_13523148.git
     ```
 
-4. **Build the Project**: Navigate to the project directory and run the following command to build the project:
+4. ```bash
+   cd demo
+   ```
+5. **Build the Project**: Navigate to the project directory and run the following command to build the project:
 
     ```bash
     mvn clean install
     ```
 
-5. **Run the Project**: Navigate to the project directory and run the following command to run the project:
+6. **Run the Project**: Navigate to the project directory and run the following command to run the project:
 
     ```bash
     mvn javafx:run
@@ -68,8 +71,10 @@ This project is a solution finder for the IQ Puzzler Pro game implemented using 
 
 ## 🎁 Bonus Status
 
--   GUI ✅
--   Save to Image ✅
+| Feature       | Status |
+| ------------- | ------ |
+| GUI           | ✅     |
+| Save to Image | ✅     |
 
 ## 📁 Project Structure
 

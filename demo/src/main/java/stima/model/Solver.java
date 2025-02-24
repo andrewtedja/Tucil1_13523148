@@ -11,7 +11,6 @@ public class Solver {
     private long endTime = 0;
     private int runtime = 0;
     private volatile boolean stopped;
-    
     private boolean showTesting = false;
     private boolean debugWriteToFile = false;
     private PrintWriter debugWriter;
@@ -44,11 +43,9 @@ public class Solver {
     public boolean solve(Board board, ArrayList<Piece> pieceList) {
         startTime = System.nanoTime();
         stopped = false;
-
         if (debugWriteToFile) {
             writeBoard(board);
         }
-
         boolean result = solveHelper(board, pieceList, 0);
         endTime = System.nanoTime();
         runtime = (int) (endTime - startTime) / 1000000;
@@ -60,38 +57,29 @@ public class Solver {
 
     private boolean solveHelper(Board board, ArrayList<Piece> pieceList, int pieceIndex) {
         if (stopped) return false;
-
         if (pieceIndex > pieceList.size()) {
             return false;
         }
         if (pieceIndex == pieceList.size()) {
             return board.isFullyFilled();
         }
-        
         Piece piece = pieceList.get(pieceIndex);
-        
+    
         for (int i = 0; i < board.getRows(); i++) {
             for (int j = 0; j < board.getCols(); j++) {
                 for (Piece orientation: piece.getAllOrientations()) {
-                    // System.out.println("testinside");
                     if (board.canPlacePiece(orientation, i, j)) {
-                        // System.out.println("testinsideinside");
                         if (showTesting) {
-                            // System.out.println("testing");
-
                             board.printBoard();
                         }
-                        
                         board.placePiece(orientation, i, j);
                         attempt++;
-
                         if (debugWriteToFile) {
                             writeBoard(board);
                         }
                         if (solveHelper(board, pieceList, pieceIndex + 1)){
                             return true;
                         }
-                        // System.out.println("donee1");
                         // ! BACKTRACKING
                         board.removePiece(orientation, i, j);
                         if (showTesting) {
@@ -109,10 +97,6 @@ public class Solver {
         return false;
     }
     
-    public void stop() {
-        stopped = true; 
-    }
-    
     // private void clearConsole() {
     //     System.out.print("\033[H\033[2J"); 
     //     System.out.flush();
@@ -124,7 +108,12 @@ public class Solver {
     }
 
     public int getRuntime() {
-        return runtime;
+        return Math.abs(runtime);
+    }
+
+    public void stop() {
+        stopped = true; 
+        
     }
 
     // ? Helper
