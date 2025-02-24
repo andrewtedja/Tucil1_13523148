@@ -28,7 +28,7 @@ This project is a solution finder for the IQ Puzzler Pro game implemented using 
 
 ## 🏃‍♂️How to Run
 
-1. **Install Java**: Download and install Java from [here](https://www.oracle.com/java/technologies/downloads/).
+1. **Install Java**: Download and install Java (tested on JDK 17) from [here](https://www.oracle.com/java/technologies/downloads/).
 2. **Install Maven**: Download and install Maven from [here](https://maven.apache.org/download.cgi).
 3. **Clone the Repository**: Use one of the following commands to clone the repository:
 
@@ -77,6 +77,12 @@ This project is a solution finder for the IQ Puzzler Pro game implemented using 
 | Save to Image | ✅     |
 
 ## 📁 Project Structure
+
+### NOTE:
+
+Projek ini dibuat menggunakan Maven dan JavaFX dan tidak menggunakan pendekatan executable di folder bin. Program dapat dijalankan dengan perintah Maven di bagian [How to Run](#how-to-run). Selain itu, folder demo berisi file-file yang dibutuhkan untuk menjalankan program termasuk folder src dan target. Folder doc berisi dokumen laporan.
+
+Struktur folder:
 
 ```bash
 Tucil1_13523148
